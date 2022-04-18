@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#define LEX "cool"
+#include "ModelosComputacion.h"
+
+//Esto es solo un ejemplo de clase en C++;
+class ModeloComputacion
+{
+private:
+	vector<float> Notas;
+	vector<string> Alumnos, Classes;
+	string Profesora, Departamento;
+
+public:
+	ModeloComputacion(string P, string D);
+
+	void ModificarNota(int i, float vx);
+
+}
+
+void ModeloComputacion::ModificarNota(int i, float vx){
+	this->Notas[i] = vx;
+}
+
+enum NOTAS{
+	APROBADO,
+	SUSPENSO
+};
+
+struct GRAMMARS{
+	int Type;
+	bool minimal, normalizada;
+} G;
+
+/* FUNCIÓN PARA DIBUJAR NUESTRA PIRAMIDE
+ * @author Brian Sena Simons
+ * No necesita de ningún parámetro, ya que
+ * utilizamos el std::cin;
+ */
+void dibujarPiramide(){
+	int rows,i,j,space;
+	cout<<"Enter number of rows: ";
+	cin>>rows;
+	for(i=rows;i>=1;--i)
+	{
+		for(space=0;space<rows-i;++space)
+			cout<<"  ";
+		for(j=i;j<=2*i-1;++j)
+			cout<<"* ";
+		for(j=0;j<i-1;++j)
+			cout<<"* ";
+		cout<<endl;
+	}
+}
+
+int main(void){
+	ModeloComputacion MC = new ModeloComputacion();
+	int i = MC->Alumnos.find("Brian Sena Simons");
+
+	MC->ModificarNota(i,10);
+
+	dibujarPiramide();
+
+	switch(SiEstoEsGuay){
+		case SI:
+			printf("Aprobado!!!\n");
+			break;
+		case NO:
+			printf("Aprobado!!!\n");
+			break;
+	}
+
+}
+
+
+
+/* Ejemplo de Ejecución
+Enter number of rows: 6
+# # # # # # # # # # #
+  # # # # # # # # #
+    # # # # # # #
+      # # # # #
+        # # #
+          #
+
+Aprobado!!!!
+
+*/
