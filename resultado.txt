@@ -1,0 +1,91 @@
+NECESITAMOS INCLUIR:  "dictionary.h" 
+
+NOS AUXILIAMOS DE:  namespace std; 
+
+DEFINIMOS EL MÉTODO: Dictionary(const Dictionary & other)  DE LA CLASE Dictionary TAL QUE:
+	ASIGNAMOS: this->words=other.words;
+
+
+DEFINIMOS EL MÉTODO: count(const string & val)const  DE LA CLASE int Dictionary TAL QUE:
+	//string l= (basic_string<char> &&) val;
+	RETORNAMOS:  this->words.count(val); 
+
+
+DEFINIMOS EL MÉTODO: exists(const string &val) const  DE LA CLASE bool Dictionary TAL QUE:
+	DEFINIMOS EL CONDICIONAL: bool resultado=false;
+	HACEMOS LO SIGUIENTE: string l= (basic_string<char> &&) val; 
+	EN CASO DE QUE SE CUMPLA: (this->words.find(l)!=this->words.end())
+		ASIGNAMOS: resultado=true;
+	RETORNAMOS:  resultado; 
+
+/*pair<set<string>::iterator,bool>*/
+DEFINIMOS EL MÉTODO: insert(const string &val)  DE LA CLASE  Dictionary TAL QUE:
+	NECESITAMOS UNAS ESTRUCTURAS COMO: pair<set<string>::iterator,bool> resultado;
+
+	DEFINIMOS EL STRING: string palabra=val;
+
+	LLAMAMOS A LA FUNCIÓN: 
+	transform(palabra.begin(),palabra.end(),palabra.begin(),::toupper);
+
+	ASIGNAMOS: resultado=words.insert(val);
+	RETORNAMOS:  resultado; 
+
+
+DEFINIMOS EL MÉTODO: erase(const string &val)  DE LA CLASE unsigned int Dictionary TAL QUE:
+	RETORNAMOS:  this->words.erase(val); 
+
+
+DEFINIMOS EL MÉTODO: clear()  DE LA CLASE void Dictionary TAL QUE:
+	HACEMOS LO SIGUIENTE: this->words.clear(); 
+
+
+DEFINIMOS EL MÉTODO: empty() const  DE LA CLASE bool Dictionary TAL QUE:
+	RETORNAMOS:  this->words.empty(); 
+
+
+DEFINIMOS EL MÉTODO: size() DE LA CLASE unsigned int Dictionary TAL QUE:
+	RETORNAMOS:  this->words.size(); 
+
+
+DEFINIMOS EL MÉTODO: getOcurrences(const char c)  DE LA CLASE int Dictionary TAL QUE:
+	// string l= reinterpret_cast<const char *>(c);
+	DECLARAMOS UN VALOR NÚMERICO:  suma=0;
+	DECLARAMOS UN VALOR NÚMERICO:  veces=0;
+	PARA it=this->words.begin()  MIENTRAS it!=this->words.end() AUMENTAMOS UNO CADA VEZ Y HACEMOS:
+		ASIGNAMOS: veces=0;
+		PARA i=0  MIENTRAS i<it->size() AUMENTAMOS UNO CADA VEZ Y HACEMOS:
+			HACEMOS LO SIGUIENTE: if(tolower(c)==(*it)[i])
+				veces++; 
+
+		ASIGNAMOS: suma+=veces;
+
+	RETORNAMOS:  suma; 
+
+
+DEFINIMOS EL MÉTODO: getTotalLetters()  DE LA CLASE int Dictionary TAL QUE:
+	DECLARAMOS UN VALOR NÚMERICO:  suma=0;
+	DEFINIMOS EL CARACTER:  letra='A';
+	LLAMAMOS A LA FUNCIÓN: 
+	while(letra<='Z')
+		suma+= getOcurrences(letra++);
+	RETORNAMOS:  suma; 
+
+
+DEFINIMOS EL MÉTODO: wordsOfLength(int length)  DE LA CLASE  Dictionary TAL QUE:
+	NECESITAMOS UNA ESTRUCTURA COMO: vector<string> palabras;
+	ASIGNAMOS: vector<string>::iterator i=palabras.begin();
+
+	HACEMOS LO SIGUIENTE: set<string>::iterator j; 
+
+	PARA j = words.begin()   MIENTRAS j!=this->words.end() AUMENTAMOS UNO CADA VEZ Y HACEMOS:
+		EN CASO DE QUE SE CUMPLA:  (j->size() == length) 
+			ASIGNAMOS: i=palabras.insert(i, *words.find(*j));
+
+
+	LLAMAMOS A LA FUNCIÓN: 
+	reverse(palabras.begin(), palabras.end());
+
+	RETORNAMOS:  palabras; 
+
+
+
